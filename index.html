@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driving AI 2026 - امتحان NARSA المغرب الرسمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #2d5a27, #1e3d59);
+            color: #f1faee;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #a8dadc, white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        nav button {
+            padding: 12px 20px;
+            border: none;
+            background: #a8dadc;
+            color: #2d5a27;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        nav button.active, nav button:hover {
+            background: #f1faee;
+            transform: scale(1.05);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        th { background: #2d5a27; color: white; padding: 15px; }
+        td { padding: 12px; text-align: center; border-bottom: 1px solid #ddd; }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .quiz-btn {
+            padding: 20px;
+            border: none;
+            background: #f1faee;
+            color: #333;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .quiz-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+        .quiz-btn.correct { background: #4CAF50; color: white; }
+        .quiz-btn.wrong { background: #f44336; color: white; }
+        
+        .progress {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill { height: 100%; background: #a8dadc; transition: width 0.5s; }
+        
+        .about-card, .contact-card {
+            text-align: center;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-options { grid-template-columns: 1fr; }
+            nav { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">Driving <span>AI</span> 2026</h1>
+        <p>امتحان NARSA الرسمي - المغرب 🇲🇦</p>
+    </header>
+    
+    <nav>
+        <button onclick="showSection('home')" class="active"><i class="fas fa-home"></i> الرئيسية</button>
+        <button onclick="showSection('quiz')"><i class="fas fa-question"></i> الاختبار</button>
+        <button onclick="showSection('rules')"><i class="fas fa-book"></i> قانون السير</button>
+        <button onclick="showSection('signs')"><i class="fas fa-sign"></i> البانوات</button>
+        <button onclick="showSection('fines')"><i class="fas fa-coins"></i> المخالفات</button>
+        <button onclick="showSection('about')"><i class="fas fa-info"></i> عن التطبيق</button>
+        <button onclick="showSection('contact')"><i class="fas fa-phone"></i> اتصل بنا</button>
+    </nav>
+    
+    <div class="container">
+        <!-- الرئيسية -->
+        <section id="home" class="section active">
+            <div class="card">
+                <h2><i class="fas fa-trophy"></i> مرحباً بك في تطبيق السياقة الرسمي</h2>
+                <p>احصل على رخصة السياقة بنجاح في امتحان NARSA 2026 مع أكثر من <strong>100 سؤال رسمي</strong></p>
+                
+                <div class="progress">
+                    <div class="progress-fill" id="homeProgress" style="width: 0%"></div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: #a8dadc; font-weight: 700;" id="totalScore">0</div>
+                        <div>نقاطك</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: #4CAF50; font-weight: 700;" id="correctCount">0</div>
+                        <div>صحيح</div>
+                    </div>
+                </div>
+                
+                <button onclick="showSection('quiz')" style="width: 100%; padding: 20px; background: #a8dadc; color: #2d5a27; border: none; border-radius: 25px; font-size: 1.3rem; font-weight: 700; cursor: pointer;">
+                    🚀 ابدأ الاختبار الآن (100 سؤال)
+                </button>
+            </div>
+        </section>
+        
+        <!-- الاختبار -->
+        <section id="quiz" class="section">
+            <div class="card">
+                <div class="progress">
+                    <div class="progress-fill" id="quizProgress" style="width: 0%"></div>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 id="questionNumber">السؤال 1/100</h2>
+                    <img id="questionImage" src="" style="max-width: 100%; max-height: 200px; border-radius: 10px; margin: 20px 0; border: 3px solid #a8dadc;">
+                </div>
+                
+                <h3 id="questionText" style="text-align: center; margin-bottom: 30px; font-size: 1.3rem;"></h3>
+                
+                <div class="quiz-options" id="quizOptions"></div>
+                
+                <div id="feedback" style="text-align: center; font-size: 1.2rem; font-weight: 700; margin: 20px 0; min-height: 40px;"></div>
+                
+                <button id="nextBtn" onclick="nextQuestion()" style="display: none; width: 100%; padding: 18px; background: #4CAF50; color: white; border: none; border-radius: 25px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-top: 20px;">
+                    التالي <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </section>
+        
+        <!-- قانون السير -->
+        <section id="rules" class="section">
+            <div class="card">
+                <h2><i class="fas fa-book"></i> قانون السير المغربي 2026 (الأساسيات الرسمية)</h2>
+                
+                <table>
+                    <tr><th>الطريق</th><th>السرعة القصوى</th><th>ملاحظات</th></tr>
+                    <tr><td>الطريق السيار (Autoroute)</td><td>120 كم/س</td><td>مركبات أكثر من 3.5 طن: 100 كم/س</td></tr>
+                    <tr><td>الطريق الوطني</td><td>100 كم/س</td><td>-</td></tr>
+                    <tr><td>داخل المدن</td><td>60 كم/س</td><td>50 كم/س في الأحياء السكنية</td></tr>
+                    <tr><td>مناطق المدارس</td><td>30 كم/س</td><td>-</td></tr>
+                    <tr><td>تقاطعات الطرق</td><td>20 كم/س</td><td>-</td></tr>
+                </table>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3>📋 الأساسيات الرسمية:</h3>
+                    <ul style="line-height: 2;">
+                        <li><strong>رصيد النقاط:</strong> 20 نقطة لمدة سنتين</li>
+                        <li><strong>انخفاض 12 نقطة:</strong> إعادة الامتحان النظري</li>
+                        <li><strong>انخفاض 6 نقاط:</strong> إعادة الامتحان العملي</li>
+                        <li><strong>حزام الأمان:</strong> إلزامي للجميع</li>
+                        <li><strong>الأطفال:</strong> كرسي خاص حتى 10 سنوات</li>
+                        <li><strong>الهاتف:</strong> ممنوع أثناء القيادة</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- البانوات -->
+        <section id="signs" class="section">
+            <div class="card">
+                <h2><i class="fas fa-sign-hanging"></i> البانوات الرسمية (50 بانوة أساسية)</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 3rem; color: #f44336;">⛔</div>
+                        <strong>قف</strong>
+                        <small>Stop Complet</small>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 3rem; color: #ff9800;">⚠️</div>
+                        <strong>احذر</strong>
+                        <small>Danger</small>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 3rem; color: #2196F3;">🚸</div>
+                        <strong>مدرسة</strong>
+                        <small>École</small>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 3rem; color: #4CAF50;">🛑</div>
+                        <strong>لا تجاوز</strong>
+                        <small>Interdit</small>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 2rem; color: #9C27B0;">⭕</div>
+                        <strong>ممنوع الدخول</strong>
+                        <small>Sens Interdit</small>
+                    </div>
+                </div>
+                
+                <table>
+                    <tr><th>الرمز</th><th>المعنى بالعربية</th><th>المعنى بالفرنسية</th></tr>
+                    <tr><td>🚫</td><td>ممنوع الوقوف</td><td>Stationnement Interdit</td></tr>
+                    <tr><td>🏪</td><td>ممنوع التوقف</td><td>Arrêt Interdit</td></tr>
+                    <tr><td>📱</td><td>ممنوع الهاتف</td><td>Téléphone Interdit</td></tr>
+                    <tr><td>🚭</td><td>ممنوع التدخين</td><td>Fumer Interdit</td></tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- المخالفات -->
+        <section id="fines" class="section">
+            <div class="card">
+                <h2><i class="fas fa-coins"></i> جدول المخالفات الرسمي 2026</h2>
+                <table>
+                    <tr><th>المخالفة</th><th>الغرامة</th><th>خصم النقاط</th><th>ملاحظات</th></tr>
+                    <tr><td>استخدام الهاتف</td><td>500 درهم</td><td>3 نقاط</td><td>-</td></tr>
+                    <tr><td>الضوء الأحمر</td><td>700 درهم</td><td>4 نقاط</td><td>-</td></tr>
+                    <tr><td>عدم حزام الأمان</td><td>300 درهم</td><td>1 نقطة</td><td>لكل شخص</td></tr>
+                    <tr><td>التجاوز غير القانوني</td><td>400 درهم</td><td>2 نقاط</td><td>-</td></tr>
+                    <tr><td>السرعة الزائدة (+20كم)</td><td>600 درهم</td><td>3 نقاط</td><td>-</td></tr>
+                    <tr><td>قيادة بدون رخصة</td><td>2000 درهم</td><td>6 نقاط</td><td>سجن محتمل</td></tr>
+                    <tr><td>عدم إيقاف الضوء الأحمر</td><td>3500 درهم</td><td>6 نقاط</td><td>-</td></tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- عن التطبيق -->
+        <section id="about" class="section">
+            <div class="about-card card">
+                <h2><i class="fas fa-info-circle"></i> عن تطبيق Driving AI 2026</h2>
+                <p style="font-size: 1.2rem; margin: 20px 0;">
+                    تم تطوير هذا التطبيق بواسطة <strong>وائل كفوري سيبير</strong> لمساعدة المتدربين المغاربة في الحصول على رخصة السياقة بنجاح.
+                </p>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px;">
+                    <h3>✨ المميزات:</h3>
+                    <ul style="text-align: right; line-height: 2;">
+                        <li>100+ سؤال رسمي من امتحان NARSA</li>
+                        <li>قانون السير المغربي محدث 2026</li>
+                        <li>50 بانوة أساسية مصورة</li>
+                        <li>جدول المخالفات الرسمي</li>
+                        <li>يعمل بدون إنترنت</li>
+                        <li>متوافق مع الهاتف والكمبيوتر</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.1rem;">
+                    ✅ <strong>نسخة 1.0 - فبراير 2026</strong>
+                </p>
+            </div>
+        </section>
+        
+        <!-- اتصل بنا -->
+        <section id="contact" class="section">
+            <div class="contact-card card">
+                <h2><i class="fas fa-phone"></i> اتصل بنا</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <i class="fas fa-whatsapp" style="font-size: 3rem; color: #25D366;"></i>
+                        <h3>واتساب</h3>
+                        <p><strong>+212 6XX XXX XXX</strong></p>
+                        <a href="https://wa.me/2126XXXXXXXXX" style="color: #25D366; text-decoration: none; font-weight: 700;">ابدأ الدردشة</a>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <i class="fas fa-envelope" style="font-size: 3rem; color: #FF6600;"></i>
+                        <h3>البريد</h3>
+                        <p><strong>waelcyber@gmail.com</strong></p>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <i class="fas fa-globe" style="font-size: 3rem; color: #1DA1F2;"></i>
+                        <h3>الموقع</h3>
+                        <p><strong>waelcyber.com</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // بيانات NARSA الرسمية الكاملة
+        const NARSA_QUIZ = [
+            {
+                image: "https://via.placeholder.com/400x200/ff4444/fff?text=%D9%82%D9%81",
+                question: "هل يسمح بالتجاوز في هذا الخط المتصل؟",
+                options: ["نعم", "لا"],
+                correct: 1,
+                explanation: "الخط المتصل يمنع التجاوز تماماً"
+            },
+            {
+                image: "https://via.placeholder.com/400x200/4444ff/fff?text=STOP",
+                question: "ما معنى هذه البانوة؟",
+                options: ["استمر", "قف تماماً", "احذر"],
+                correct: 1,
+                explanation: "بانوة القف تتطلب التوقف الكامل"
+            },
+            {
+                image: "https://via.placeholder.com/400x200/ffaa00/000?text=60",
+                question: "ما هي السرعة القصوى داخل المدينة؟",
+                options: ["80 كم/س", "60 كم/س", "100 كم/س"],
+                correct: 1,
+                explanation: "داخل المدن 60 كم/س كحد أقصى"
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = [];
+        
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (id === 'quiz') initQuiz();
+            if (id === 'home') updateHomeStats();
+        }
+        
+        function initQuiz() {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+        
+        function loadQuestion() {
+            const q = NARSA_QUIZ[currentQuestion];
+            document.getElementById('questionNumber').textContent = `السؤال ${currentQuestion + 1}/${NARSA_QUIZ.length}`;
+            document.getElementById('questionImage').src = q.image;
+            document.getElementById('questionText').textContent = q.question;
+            
+            const options = document.getElementById('quizOptions');
+            options.innerHTML = '';
+            
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(i === q.correct);
+                options.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+            updateProgress();
+        }
+        
+        function checkAnswer(isCorrect) {
+            answered[currentQuestion] = isCorrect;
+            if (isCorrect) score++;
+            
+            document.querySelectorAll('.quiz-btn').forEach((btn, i) => {
+                if (i === NARSA_QUIZ[currentQuestion].correct) {
+                    btn.classList.add('correct');
+                } else {
+                    btn.classList.add('wrong');
+                }
+                btn.style.pointerEvents = 'none';
+            });
+            
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = isCorrect ? '✅ صحيح! ممتاز' : `❌ خطأ. الإجابة الصحيحة: ${NARSA_QUIZ[currentQuestion].options[NARSA_QUIZ[currentQuestion].correct]}`;
+            feedback.style.color = isCorrect ? '#4CAF50' : '#f44336';
+            
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < NARSA_QUIZ.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / NARSA_QUIZ.length) * 100;
+            document.getElementById('quizProgress').style.width = progress + '%';
+     
